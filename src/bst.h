@@ -8,6 +8,8 @@
 struct bst_node_t {
     int isNull;
     int value;
+    int leftOffset;
+    int rightOffset;
 };
 
 struct bst_tree_t {
@@ -18,4 +20,5 @@ struct bst_tree_t {
 
 int bst_create_tree(struct bst_tree_t* tree);
 int bst_set_capacity(struct bst_tree_t* tree, int capacity);
+void bst_set_null_unused(struct bst_tree_t *pTree);
 #endif //BST_BST_H
