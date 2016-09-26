@@ -25,3 +25,8 @@ platform.
 To use this bst, include the `bst.h` file into your source code. All
 functions imported from that source file start with `bst_` (ex.
 `bst_create_tree(tree);`).
+
+### Todo
+
+- an eliminate key method
+- debump method, to eliminate capacity of the nodes array

@@ -30,11 +30,14 @@ void main(int argc, char** argv) {
 
 	// check ten random numbers
 	for (times = 0; times < 10; ++times) {
+		// get random number to check
 		int toCheck = rand() % 20;
-		char *toPrint = (tree_has_key(tree, toCheck)) ?
-	                    "true" : "false";
+		// check what string to print
+		char *toPrint = (tree_has_key(tree, toCheck)) ? "true" : "false";
+		// log the result
 		printf("tree has %7i: %5s\n", toCheck, toPrint);
 	}
+
 	bst_debug_print(tree);
     exit(0);
 }
