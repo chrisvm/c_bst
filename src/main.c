@@ -26,6 +26,15 @@ void main(int argc, char** argv) {
 		bst_add_key(tree, toAdd);
 	}
 
+	srand((unsigned) time(&t));
+
+	// check ten random numbers
+	for (times = 0; times < 10; ++times) {
+		int toCheck = rand() % 20;
+		char *toPrint = (tree_has_key(tree, toCheck)) ?
+	                    "true" : "false";
+		printf("tree has %7i: %5s\n", toCheck, toPrint);
+	}
 	bst_debug_print(tree);
     exit(0);
 }

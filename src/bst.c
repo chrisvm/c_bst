@@ -21,9 +21,8 @@ void bst_set_null_unused(struct bst_tree_t *tree)
 
 int bst_create_tree(struct bst_tree_t** tree)
 {
-	if (!*tree) {
-		*tree = malloc(sizeof(struct bst_tree_t));
-	}
+	tree[0] = malloc(sizeof(struct bst_tree_t));
+
 
 	struct bst_tree_t* _tree = *tree;
     _tree->nodeCount = 0;
@@ -122,6 +121,34 @@ void bst_add_key(struct bst_tree_t* tree, int key)
 	// check if we filled the capacity
 	if (tree->nodeCount == tree->capacity) {
 		bst_bump_capacity(&tree);
+	}
+}
+
+unsigned int tree_has_key(struct bst_tree_t* tree, int key)
+{
+	struct bst_node_t* currentNode = &tree->nodes[0];
+	while (1) {
+		// if found, return
+		if (currentNode->value == key) {
+			return 1;
+		}
+
+		// did not found the key
+		if (currentNode->isNull) {
+			return 0;
+		}
+
+		if (key < currentNode->value) {
+			if (currentNode->leftOffset == 0) {
+				return 0;
+			}
+			currentNode = &tree->nodes[currentNode->leftOffset - 1];
+		} else {
+			if (currentNode->rightOffset == 0) {
+				return 0;
+			}
+			currentNode = &tree->nodes[currentNode->rightOffset - 1];
+		}
 	}
 }
 

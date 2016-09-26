@@ -5,7 +5,9 @@ Binary Search Tree
 
 This is a C implementation of a binary search tree. It supports
 int numbers, although (using void pointers) it could be used with
-any value or structure.
+any value or structure. This was done just to brush up on my C
+knowledge. I plan to implement a RB Tree when I finish the bst
+implementation.
 
 ### Building
 

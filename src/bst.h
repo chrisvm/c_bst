@@ -47,4 +47,7 @@ struct bst_node_t* bst_parent_for_key(struct bst_tree_t* tree, int key);
 // check if node is null
 unsigned int node_is_leaf(struct bst_node_t *node);
 
+// check if has key
+unsigned int tree_has_key(struct bst_tree_t* tree, int key);
+
 #endif //BST_BST_H
