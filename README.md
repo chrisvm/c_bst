@@ -28,5 +28,5 @@ functions imported from that source file start with `bst_` (ex.
 
 ### Todo
 
-- an eliminate key method
+- eliminate key method
 - debump method, to eliminate capacity of the nodes array
