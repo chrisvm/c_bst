@@ -26,7 +26,7 @@ struct bst_tree_t
 int bst_create_tree(struct bst_tree_t** tree);
 
 // bumps the capacity of a tree in power of two increments
-int bst_bump_capacity(struct bst_tree_t* tree);
+int bst_bump_capacity(struct bst_tree_t** _tree);
 
 // copies a node from tree with an index to another tree
 void bst_copy_node(struct bst_node_t* tree1, unsigned int index1,

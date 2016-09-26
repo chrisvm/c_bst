@@ -28,7 +28,7 @@ int bst_create_tree(struct bst_tree_t** tree)
 	struct bst_tree_t* _tree = *tree;
     _tree->nodeCount = 0;
     _tree->capacity = 3;
-    _tree->nodes = malloc(sizeof(struct bst_tree_t) * _tree->capacity);
+    _tree->nodes = calloc(_tree->capacity, sizeof(struct bst_tree_t));
     bst_set_null_unused(_tree);
     return 1;
 }
@@ -42,29 +42,30 @@ void bst_copy_node(struct bst_node_t* tree1, unsigned int index1,
 	tree2[index2].rightOffset = tree1[index1].rightOffset;
 }
 
-int bst_bump_capacity(struct bst_tree_t* tree)
+int bst_bump_capacity(struct bst_tree_t** tree)
 {
+	struct bst_tree_t* _tree = *(tree);
+
     // keep reference to old nodes (to copy)
-    struct bst_node_t* temp = tree->nodes;
+    struct bst_node_t* temp = _tree->nodes;
 
 	// keep old capacity, to iterate old array later
-	unsigned int oldCapacity = tree->capacity;
+	unsigned int oldCapacity = _tree->capacity;
 
 	// bump old capacity
-	tree->capacity *= 2;
+	_tree->capacity *= 2;
 
     // create new memory space with size requested
-	unsigned int newSize = sizeof(struct bst_node_t) * tree->capacity;
-    tree->nodes = malloc(newSize);
+    _tree->nodes = calloc(_tree->capacity, sizeof(struct bst_node_t));
 
 	// copy old values
 	int index;
 	for (index = 0; index < oldCapacity; ++index) {
-		bst_copy_node(temp, index, tree->nodes, index);
+		bst_copy_node(temp, index, _tree->nodes, index);
 	}
 
     // set null to unused
-	bst_set_null_unused(tree);
+	bst_set_null_unused(_tree);
 
 	// free old array
 	free(temp);
@@ -75,10 +76,11 @@ void bst_debug_print(struct bst_tree_t* tree)
 	int index;
 	struct bst_node_t node;
 
-	printf("Node Offset | isNull      | Value      \n");
+	printf("Node Offset | isNull      | Value      | Left        | Right      \n");
+	printf("------------------------------------------------------------------\n");
 	for (index = 0; index < tree->capacity; ++index) {
 		node = tree->nodes[index];
-		printf("%i | %i | %i \n", index, node.isNull, node.value);
+		printf("%11i | %11i | %11i | %11i | %11i \n", index, node.isNull, node.value, node.leftOffset, node.rightOffset);
 	}
 }
 
@@ -95,45 +97,31 @@ void bst_add_key(struct bst_tree_t* tree, int key)
 		return;
 	}
 
-	// look where to add the key
-	unsigned short found = 0;
-
 	// start in the root node (index == 0)
-	struct bst_node_t* currentNode = &(tree->nodes[0]), *tNode = NULL;
+	struct bst_node_t* currentNode = &(tree->nodes[0]);
 
-	while (!found) {
-
-		// check if leaf node
-		if (node_is_leaf(currentNode)) {
-			if (key < currentNode->value) {
-				currentNode->leftOffset = newNodeIndex + 1;
-			} else {
-				currentNode->rightOffset = newNodeIndex + 1;
-			}
-			break;
-		}
-
-		// save current node
-		tNode = currentNode;
-
-		unsigned int toAddIndex;
+	while (1) {
+		// check direction
 		if (key < currentNode->value) {
-			toAddIndex = currentNode->leftOffset - 1;
+			if (currentNode->leftOffset == 0) {
+				currentNode->leftOffset = newNodeIndex + 1;
+				break;
+			}
+
+			currentNode = &(tree->nodes[currentNode->leftOffset - 1]);
 		} else {
-			toAddIndex = currentNode->rightOffset - 1;
-		}
+			if (currentNode->rightOffset == 0) {
+				currentNode->rightOffset = newNodeIndex + 1;
+				break;
+			}
 
-		currentNode = &(tree->nodes[toAddIndex]);
-
-		// if null, found place to add
-		if (currentNode->isNull) {
-
+			currentNode = &(tree->nodes[currentNode->rightOffset - 1]);
 		}
 	}
 
 	// check if we filled the capacity
 	if (tree->nodeCount == tree->capacity) {
-		bst_bump_capacity(tree);
+		bst_bump_capacity(&tree);
 	}
 }
 
