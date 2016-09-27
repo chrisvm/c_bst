@@ -38,11 +38,14 @@ void bst_set_null_unused(struct bst_tree_t *pTree);
 // print the contents of a tree
 void bst_debug_print(struct bst_tree_t* tree);
 
+// pretty print the contents of the tree
+void bst_pretty_print(struct bst_tree_t* tree);
+
 // add a number to the tree
 void bst_add_key(struct bst_tree_t* tree, int key);
 
 // check if has key
-unsigned int tree_has_key(struct bst_tree_t* tree, int key);
+unsigned int bst_has_key(struct bst_tree_t* tree, int key);
 
 // check if node is null
 unsigned int node_is_leaf(struct bst_node_t *node);

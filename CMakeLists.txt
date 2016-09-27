@@ -5,7 +5,7 @@ set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c11")
 
 set(SOURCE_FILES
         src/bst.c
-        src/bst.h src/main.c)
+        src/bst.h src/main.c src/stack.cpp src/stack.h)
 
 add_executable(bst ${SOURCE_FILES})
 set_property(TARGET bst PROPERTY C_STANDARD 99)

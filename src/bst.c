@@ -2,6 +2,7 @@
 // Created by cvelez on 8/24/2016.
 //
 #include "bst.h"
+#include "stack.h"
 #include "stdio.h"
 #include "malloc.h"
 
@@ -75,17 +76,21 @@ void bst_debug_print(struct bst_tree_t* tree)
 	int index;
 	struct bst_node_t node;
 
-	printf("Node Offset | isNull      | Value      | Left        | Right      \n");
-	printf("------------------------------------------------------------------\n");
+	printf("Node Offset | isNull      | Value       | Left        | Right      \n");
+	printf("-------------------------------------------------------------------\n");
 	for (index = 0; index < tree->capacity; ++index) {
 		node = tree->nodes[index];
 		printf("%11i | %11i | %11i | %11i | %11i \n", index, node.isNull, node.value, node.leftOffset, node.rightOffset);
 	}
 }
 
-// todo: finish this method
 void bst_add_key(struct bst_tree_t* tree, int key)
 {
+	// if already in tree, dont add
+	if (bst_has_key(tree, key)) {
+		return;
+	}
+
 	// add to the last open space (we guarantee is always open)
 	int newNodeIndex = tree->nodeCount++;
 	tree->nodes[newNodeIndex].isNull = 0;
@@ -106,14 +111,12 @@ void bst_add_key(struct bst_tree_t* tree, int key)
 				currentNode->leftOffset = newNodeIndex + 1;
 				break;
 			}
-
 			currentNode = &(tree->nodes[currentNode->leftOffset - 1]);
 		} else {
 			if (currentNode->rightOffset == 0) {
 				currentNode->rightOffset = newNodeIndex + 1;
 				break;
 			}
-
 			currentNode = &(tree->nodes[currentNode->rightOffset - 1]);
 		}
 	}
@@ -124,7 +127,7 @@ void bst_add_key(struct bst_tree_t* tree, int key)
 	}
 }
 
-unsigned int tree_has_key(struct bst_tree_t* tree, int key)
+unsigned int bst_has_key(struct bst_tree_t* tree, int key)
 {
 	struct bst_node_t* currentNode = &tree->nodes[0];
 	while (1) {
@@ -155,4 +158,16 @@ unsigned int tree_has_key(struct bst_tree_t* tree, int key)
 unsigned int node_is_leaf(struct bst_node_t *node)
 {
 	return (node->rightOffset == 0 && node->leftOffset == 0);
+}
+
+// todo: finish this method. use stack to get the height of the tree
+void bst_pretty_print(struct bst_tree_t* tree)
+{
+	unsigned int maxHeight = 0, currentIndex = 0;
+
+	// create stack
+	struct stack_t* stack;
+	stack_create(&stack, tree->nodeCount);
+
+	// find height of tree (using stack)
 }

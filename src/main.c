@@ -33,7 +33,7 @@ void main(int argc, char** argv) {
 		// get random number to check
 		int toCheck = rand() % 20;
 		// check what string to print
-		char *toPrint = (tree_has_key(tree, toCheck)) ? "true" : "false";
+		char *toPrint = (bst_has_key(tree, toCheck)) ? "true" : "false";
 		// log the result
 		printf("tree has %7i: %5s\n", toCheck, toPrint);
 	}
