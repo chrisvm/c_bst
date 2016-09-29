@@ -17,10 +17,10 @@ struct stack_t
 	unsigned short errno;
 };
 
-void stack_create(stack_t** stack, unsigned int initialCapacity);
-void stack_push(stack_t* stack, int key);
-int stack_pop(stack_t* stack);
-int stack_peek(stack_t* stack);
-void stack_print(stack_t* stack);
+void stack_create(struct stack_t** stack, unsigned int initialCapacity);
+void stack_push(struct stack_t* stack, int key);
+int stack_pop(struct stack_t* stack);
+int stack_peek(struct stack_t* stack);
+void stack_print(struct stack_t* stack);
 
 #endif //BST_STACK_H

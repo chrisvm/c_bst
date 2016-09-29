@@ -32,10 +32,11 @@ int stack_pop(stack_t* stack)
 {
 	if (stack->count == 0) {
 		stack->errno = STACK_UNDERFLOW_ERROR;
-		return NULL;
+		return 0;
 	}
 
 	int popped = stack->stack[--stack->count];
+	stack->errno = STACK_SUCCESS;
 	return popped;
 }
 
@@ -46,6 +47,7 @@ int stack_peek(stack_t* stack)
 		return NULL;
 	}
 
+	stack->errno = STACK_SUCCESS;
 	return stack->stack[stack->count];
 }
 

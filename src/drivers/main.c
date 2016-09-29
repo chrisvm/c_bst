@@ -1,7 +1,7 @@
 //
 // Created by cvelez on 8/24/2016.
 //
-#include "bst.h"
+#include "../bst.h"
 #include "stdio.h"
 #include "time.h"
 #include "stdlib.h"

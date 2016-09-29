@@ -155,11 +155,6 @@ unsigned int bst_has_key(struct bst_tree_t* tree, int key)
 	}
 }
 
-unsigned int node_is_leaf(struct bst_node_t *node)
-{
-	return (node->rightOffset == 0 && node->leftOffset == 0);
-}
-
 // todo: finish this method. use stack to get the height of the tree
 void bst_pretty_print(struct bst_tree_t* tree)
 {
@@ -170,4 +165,9 @@ void bst_pretty_print(struct bst_tree_t* tree)
 	stack_create(&stack, tree->nodeCount);
 
 	// find height of tree (using stack)
+}
+
+unsigned int node_is_leaf(struct bst_node_t *node)
+{
+	return (node->rightOffset == 0 && node->leftOffset == 0);
 }
