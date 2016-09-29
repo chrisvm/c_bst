@@ -24,7 +24,6 @@ int bst_create_tree(struct bst_tree_t** tree)
 {
 	tree[0] = malloc(sizeof(struct bst_tree_t));
 
-
 	struct bst_tree_t* _tree = *tree;
     _tree->nodeCount = 0;
     _tree->capacity = 3;

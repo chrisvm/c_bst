@@ -11,4 +11,4 @@ set(SOURCE_FILES
         src/stack.h)
 
 add_executable(bst ${SOURCE_FILES})
-set_property(TARGET bst PROPERTY C_STANDARD 99)
+set_property(TARGET bst PROPERTY C_STANDARD 11)
