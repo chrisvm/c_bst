@@ -30,3 +30,5 @@ functions imported from that source file start with `bst_` (ex.
 
 - eliminate key method
 - debump method, to eliminate capacity of the nodes array
+- queue data structure to be able to do breadth first search
+- calculate tree height method

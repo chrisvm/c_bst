@@ -47,6 +47,9 @@ void bst_add_key(struct bst_tree_t* tree, int key);
 // check if has key
 unsigned int bst_has_key(struct bst_tree_t* tree, int key);
 
+// calculate the height of the tree
+unsigned int bst_get_height(struct bst_tree_t* tree);
+
 // check if node is null
 unsigned int node_is_leaf(struct bst_node_t *node);
 

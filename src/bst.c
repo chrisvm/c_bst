@@ -159,11 +159,30 @@ void bst_pretty_print(struct bst_tree_t* tree)
 {
 	unsigned int maxHeight = 0, currentIndex = 0;
 
-	// create stack
-	struct stack_t* stack;
-	stack_create(&stack, tree->nodeCount);
-
 	// find height of tree (using stack)
+}
+
+unsigned int bst_get_height(struct bst_tree_t* tree)
+{
+	// if empty, return zero
+	if (tree->nodeCount == 0) {
+		return 0;
+	}
+
+	// create stack
+	struct stack_t* nodesStack;
+	stack_create(&nodesStack, tree->nodeCount);
+
+	// start with height 1 and push root node to stack
+	unsigned int calcHeight = 1, currentIndex;
+	stack_push(nodesStack, 0);
+
+	struct bst_node_t* currentNode;
+	while (1) {
+		// get node to examine
+		currentIndex = stack_pop(tree);
+	}
+
 }
 
 unsigned int node_is_leaf(struct bst_node_t *node)

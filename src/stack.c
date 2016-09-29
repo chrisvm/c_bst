@@ -6,10 +6,10 @@
 #include "stdlib.h"
 #include "stdio.h"
 
-void stack_create(stack_t** stack, unsigned int initialCapacity)
+void stack_create(struct stack_t** stack, unsigned int initialCapacity)
 {
-	*stack = (stack_t*) malloc(sizeof(stack_t));
-	stack_t* _stack = *stack;
+	*stack = (struct stack_t*) malloc(sizeof(struct stack_t));
+	struct stack_t* _stack = *stack;
 
 	_stack->capacity = initialCapacity;
 	_stack->count = 0;
@@ -17,7 +17,7 @@ void stack_create(stack_t** stack, unsigned int initialCapacity)
 	_stack->stack = (int*) malloc(sizeof(int) * _stack->capacity);
 }
 
-void stack_push(stack_t* stack, int key)
+void stack_push(struct stack_t* stack, int key)
 {
 	if (stack->capacity == stack->count) {
 		stack->errno = STACK_OVERFLOW_ERROR;
@@ -28,7 +28,7 @@ void stack_push(stack_t* stack, int key)
 	stack->errno = STACK_SUCCESS;
 }
 
-int stack_pop(stack_t* stack)
+int stack_pop(struct stack_t* stack)
 {
 	if (stack->count == 0) {
 		stack->errno = STACK_UNDERFLOW_ERROR;
@@ -40,18 +40,18 @@ int stack_pop(stack_t* stack)
 	return popped;
 }
 
-int stack_peek(stack_t* stack)
+int stack_peek(struct stack_t* stack)
 {
 	if (stack->count == 0) {
 		stack->errno = STACK_UNDERFLOW_ERROR;
-		return NULL;
+		return 0;
 	}
 
 	stack->errno = STACK_SUCCESS;
 	return stack->stack[stack->count];
 }
 
-void stack_print(stack_t* stack)
+void stack_print(struct stack_t* stack)
 {
 	if (stack->count == 0) {
 		printf("[]");

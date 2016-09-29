@@ -7,7 +7,7 @@ set(SOURCE_FILES
         src/bst.c
         src/bst.h
         src/drivers/main.c
-        src/stack.cpp
+        src/stack.c
         src/stack.h)
 
 add_executable(bst ${SOURCE_FILES})
