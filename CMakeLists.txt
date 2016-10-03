@@ -8,7 +8,7 @@ set(SOURCE_FILES
         src/bst.h
         src/drivers/main.c
         src/stack.c
-        src/stack.h)
+        src/stack.h src/queue.c src/queue.h)
 
 add_executable(bst ${SOURCE_FILES})
 set_property(TARGET bst PROPERTY C_STANDARD 11)

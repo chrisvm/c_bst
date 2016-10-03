@@ -30,12 +30,12 @@ void stack_push(struct stack_t* stack, int key)
 
 int stack_pop(struct stack_t* stack)
 {
-	if (stack->count == 0) {
+	if (stack->count <= 0) {
 		stack->errno = STACK_UNDERFLOW_ERROR;
 		return 0;
 	}
 
-	int popped = stack->stack[--stack->count];
+	int popped = stack->stack[stack->count--];
 	stack->errno = STACK_SUCCESS;
 	return popped;
 }
